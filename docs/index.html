@@ -1,0 +1,825 @@
+<title>SOLAIN Stockyard Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+.leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:focus,.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:none;width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:none;background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:none}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:focus,.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:focus,.leaflet-container a.leaflet-popup-close-button:hover{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.logo{font:800 22px/1 Arial,"Helvetica Neue",Helvetica,sans-serif;letter-spacing:-.01em;color:var(--ink);text-transform:uppercase}
+.watermark{position:absolute;right:18px;bottom:26px;z-index:450;pointer-events:none;font:800 44px/1 Arial,"Helvetica Neue",Helvetica,sans-serif;letter-spacing:-.01em;color:#ffffff;opacity:.22;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.gate{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;background:var(--bg);padding:16px}
+.gate form{width:min(380px,100%);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:28px;display:flex;flex-direction:column;gap:14px}
+.gate .logo{font-size:40px}
+.gate label{display:flex;flex-direction:column;gap:4px;font:600 12px var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gate input{padding:9px 11px;border:1px solid var(--line);border-radius:5px;background:var(--panel-2);font:15px var(--f-body);color:var(--ink);text-transform:none;letter-spacing:0}
+.gate button{padding:10px;border:0;border-radius:5px;background:var(--accent);color:var(--accent-ink);font:700 14px var(--f-display);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.gate .err{color:var(--crit);font-size:13px;min-height:1.2em}
+.swipe{position:absolute;z-index:520;top:0;bottom:0;width:0;border-left:2px solid #fff;pointer-events:none;box-shadow:0 0 6px rgba(0,0,0,.5)}
+.swipe span{position:absolute;top:50%;left:-15px;width:30px;height:30px;border-radius:50%;background:#fff;color:#1d2327;display:grid;place-items:center;font:700 14px Arial;transform:translateY(-50%);pointer-events:auto;cursor:ew-resize}
+.swipelab{position:absolute;z-index:521;top:12px;font:600 12px var(--f-display);letter-spacing:.06em;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:3px 8px;border-radius:3px;pointer-events:none}
+.tour{position:absolute;z-index:560;left:50%;transform:translateX(-50%);bottom:16px;width:min(520px,calc(100% - 24px));background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.tour h3{font-size:17px}
+.tour .row{justify-content:space-between}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.big{font:500 26px/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.good{color:var(--good)}
+:root{
+  --bg:#e9edeb; --panel:#fafbfa; --panel-2:#f1f4f2; --ink:#16202a; --ink-2:#465361; --muted:#6f7b86; --line:#d3dad6;
+  --accent:#0e6e6a; --accent-ink:#ffffff; --accent-soft:#d7ebe8; --mapbg:#1d2327;
+  --crit:#d03b3b; --warn:#ec835a; --watch:#fab219; --good:#0ca30c;
+  --shadow:0 1px 2px rgba(16,24,32,.06),0 8px 24px rgba(16,24,32,.08);
+  --f-display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Barlow","Segoe UI",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0e1316; --panel:#151c21; --panel-2:#1b242a; --ink:#e6ebee; --ink-2:#b0bac2; --muted:#7f8b95; --line:#27323a;
+    --accent:#3bb5aa; --accent-ink:#06201e; --accent-soft:#16312f; --mapbg:#0b0f12;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0e1316; --panel:#151c21; --panel-2:#1b242a; --ink:#e6ebee; --ink-2:#b0bac2; --muted:#7f8b95; --line:#27323a;
+  --accent:#3bb5aa; --accent-ink:#06201e; --accent-soft:#16312f; --mapbg:#0b0f12;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--f-body);margin:0}
+*{box-sizing:border-box}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{display:grid;grid-template-columns:minmax(360px,430px) 1fr;grid-template-rows:auto 1fr;height:100%;min-height:0}
+header.top{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand b{font:700 21px/1.1 var(--f-display);letter-spacing:.01em}
+.brand span{font:500 12px var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.chip{font:500 12px var(--f-mono);padding:4px 8px;border:1px solid var(--line);border-radius:4px;color:var(--ink-2);background:var(--panel-2);white-space:nowrap}
+aside.side{display:flex;flex-direction:column;min-height:0;background:var(--panel);border-right:1px solid var(--line)}
+nav.tabs{display:flex;border-bottom:1px solid var(--line);overflow-x:auto}
+nav.tabs button{flex:1 0 auto;border:0;background:none;padding:11px 12px 9px;font:600 14px var(--f-display);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.pane{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:18px;min-height:0;flex:1}
+.pane>*{flex:none}
+h2{font:700 17px/1.2 var(--f-display);letter-spacing:.03em;text-transform:uppercase;margin:0;color:var(--ink)}
+h3{font:600 15px/1.25 var(--f-display);letter-spacing:.02em;margin:0}
+p{margin:0}
+.sub{color:var(--muted);font-size:13px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.kpi .k{font:600 11px var(--f-display);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font:500 22px/1.15 var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .v small{font-size:13px;color:var(--ink-2)}
+.kpi .n{font-size:12px;color:var(--ink-2)}
+.section{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--panel);padding:5px 10px;font:600 12px var(--f-display);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.fchip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 10px 3px 7px;font-size:13px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.fchip[aria-pressed="false"]{opacity:.45}
+.sw{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
+input[type=search]{width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:5px;background:var(--panel)}
+.tbl-wrap{overflow:auto;max-height:420px;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:6px 8px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child,th.l,td.l{text-align:left}
+thead th{position:sticky;top:0;background:var(--panel-2);font:600 11px var(--f-display);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);cursor:pointer;user-select:none}
+tbody td{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+tbody td.l{font-family:var(--f-body)}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--panel-2)}
+tbody tr.sel{background:var(--accent-soft)}
+.pill{display:inline-flex;align-items:center;gap:5px;font:600 11px var(--f-display);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;border:1px solid currentColor}
+.pill.critical{color:var(--crit)} .pill.warning{color:var(--warn)} .pill.watch{color:#b88100} .pill.none{color:var(--muted)}
+:root[data-theme="dark"] .pill.watch{color:var(--watch)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pill.watch{color:var(--watch)}}
+.note{font-size:13px;color:var(--ink-2);background:var(--panel-2);border-left:3px solid var(--accent);padding:8px 10px;border-radius:0 4px 4px 0}
+.chart{width:100%;display:block;overflow:visible}
+.chart text{fill:var(--muted);font:11px var(--f-mono)}
+.chart .lbl{fill:var(--ink-2);font:12px var(--f-body)}
+.chart .val{fill:var(--ink);font:500 11px var(--f-mono)}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .axis{stroke:var(--muted);stroke-width:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+main.mapwrap{position:relative;min-height:0}
+#map{position:absolute;inset:0;background:var(--mapbg)}
+.mapctl{position:absolute;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:10px;display:flex;flex-direction:column;gap:8px;max-width:calc(100% - 24px)}
+.ctl-layers{top:12px;left:12px;width:250px}
+.ctl-tools{top:12px;right:12px;flex-direction:row;padding:6px;gap:6px}
+.ctl-legend{bottom:12px;left:12px;width:250px}
+.ctl-title{font:600 11px var(--f-display);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.ctl-layers label{display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer}
+.ctl-layers select{width:100%;padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.tbtn{border:1px solid var(--line);background:var(--panel);border-radius:5px;padding:6px 10px;font:600 12px var(--f-display);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;color:var(--ink-2)}
+.tbtn[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.card{position:absolute;z-index:600;right:12px;top:60px;width:340px;max-height:calc(100% - 72px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:12px}
+.card .x{position:absolute;top:8px;right:8px;border:0;background:none;font-size:20px;line-height:1;cursor:pointer;color:var(--muted)}
+.card h3{font-size:19px;padding-right:22px}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:13px}
+dl.kv dt{color:var(--muted)}
+dl.kv dd{margin:0;text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.grad{height:10px;border-radius:2px}
+.gradlab{display:flex;justify-content:space-between;font:11px var(--f-mono);color:var(--muted)}
+.tip{position:fixed;z-index:2000;pointer-events:none;background:var(--ink);color:var(--panel);font:12px/1.35 var(--f-body);padding:6px 8px;border-radius:4px;max-width:260px;display:none}
+.tip b{font-weight:600}
+.leaflet-container{font:13px var(--f-body);background:var(--mapbg)}
+.leaflet-tooltip{background:var(--panel);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);font:12px var(--f-body)}
+.leaflet-bar a{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.drawhint{position:absolute;z-index:550;left:50%;transform:translateX(-50%);bottom:14px;background:var(--ink);color:var(--panel);padding:6px 12px;border-radius:4px;font-size:13px;display:flex;gap:10px;align-items:center}
+.drawhint button{border:1px solid currentColor;background:none;color:inherit;border-radius:3px;padding:2px 8px;cursor:pointer;font-size:12px}
+.bars{display:flex;flex-direction:column;gap:6px}
+.bar{display:grid;grid-template-columns:120px 1fr auto;gap:8px;align-items:center;font-size:13px}
+.bar .track{height:12px;background:var(--panel-2);border-radius:2px;overflow:hidden}
+.bar .fill{height:100%;border-radius:0 4px 4px 0}
+.bar .num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:12px;color:var(--ink-2);min-width:92px;text-align:right}
+.list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.list button{display:grid;grid-template-columns:1fr auto;gap:2px 10px;text-align:left;border:0;border-bottom:1px solid var(--line);background:var(--panel);padding:7px 10px;cursor:pointer}
+.list button:last-child{border-bottom:0}
+.list button:hover{background:var(--panel-2)}
+.list .t{font-weight:600;font-size:13px}
+.list .m{font:12px var(--f-mono);color:var(--ink-2);text-align:right}
+.list .s{grid-column:1/-1;font-size:12px;color:var(--muted)}
+.method p,.method li{font-size:14px;max-width:62ch}
+.method ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font:600 13px var(--f-display);letter-spacing:.1em;text-transform:uppercase;z-index:900;background:var(--mapbg)}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto 58vh auto;height:auto}
+  main.mapwrap{grid-row:2;min-height:58vh}
+  aside.side{grid-row:3;border-right:0}
+  .pane{overflow:visible}
+  .ctl-layers{width:210px}
+  .ctl-legend{display:none}
+  .card{left:12px;right:12px;width:auto;top:auto;bottom:12px;max-height:60%}
+  .tbl-wrap{max-height:none}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="gate" id="gate">
+  <form id="gate-form" autocomplete="on">
+    <div class="logo">SOLAIN</div>
+    <p class="sub">Stockyard Intelligence · client portal. Sign in to open the site data; it is encrypted and unlocks only with your credentials.</p>
+    <label for="gate-user">Username<input id="gate-user" name="username" autocomplete="username" required></label>
+    <label for="gate-pass">Password<input id="gate-pass" name="password" type="password" autocomplete="current-password" required></label>
+    <button type="submit" id="gate-btn">Sign in</button>
+    <div class="err" id="gate-err" role="alert"></div>
+  </form>
+</div>
+<div class="app">
+  <header class="top">
+    <div class="logo" aria-label="SOLAIN">SOLAIN</div>
+    <div class="brand"><b id="brand-title">Stockyard Intelligence</b><span id="brand-sub">Stockpile volume · material · heat</span></div>
+    <div class="chips" id="chips"></div>
+  </header>
+
+  <aside class="side">
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="piles" id="tab-piles">Stockpiles</button>
+      <button role="tab" aria-selected="false" data-tab="thermal" id="tab-thermal">Thermal</button>
+      <button role="tab" aria-selected="false" data-tab="monitor" id="tab-monitor">Monitoring</button>
+      <button role="tab" aria-selected="false" data-tab="valid" id="tab-valid">Validation</button>
+      <button role="tab" aria-selected="false" data-tab="method" id="tab-method">Method</button>
+    </nav>
+
+    <section class="pane" data-pane="piles">
+      <div class="kpis" id="kpi-piles"></div>
+      <div class="section">
+        <h2>Stock by material</h2>
+        <div class="bars" id="mat-bars"></div>
+        <p class="sub" id="mat-note"></p>
+      </div>
+      <div class="section">
+        <div class="row" style="justify-content:space-between"><h2>Pile register</h2><span class="sub" id="reg-count"></span></div>
+        <input type="search" id="pile-search" placeholder="Search pile ID or material">
+        <div class="row" id="mat-filter"></div>
+        <div class="tbl-wrap"><table id="pile-table"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="pane" data-pane="thermal" hidden>
+      <div class="kpis" id="kpi-thermal"></div>
+      <div class="section">
+        <h2>Hottest assets</h2>
+        <p class="sub">Peak land-surface temperature over the composite; click to locate.</p>
+        <div class="list" id="hot-list"></div>
+      </div>
+      <div class="section">
+        <h2>Asset temperature distribution</h2>
+        <svg class="chart" id="lst-hist" viewBox="0 0 400 170" role="img" aria-label="Histogram of asset peak land-surface temperature"></svg>
+      </div>
+      <div class="section">
+        <h2>Stockpile heat alerts</h2>
+        <div class="list" id="alert-list"></div>
+      </div>
+      <div class="note" id="thermal-note"></div>
+    </section>
+
+    <section class="pane" data-pane="monitor" hidden>
+      <div class="section">
+        <h2>Site stock over time</h2>
+        <p class="sub">Areas 1–2, followed with Sentinel-2 (10 m, free every few days). Each pile now = drone volume × the model's change for that pile.</p>
+        <svg class="chart" id="site-trend" viewBox="0 0 400 210" role="img" aria-label="Site stock over time"></svg>
+      </div>
+      <div class="section">
+        <h2>Port (Area 3) over time</h2>
+        <p class="sub" id="port-sub"></p>
+        <svg class="chart" id="port-trend" viewBox="0 0 400 230" role="img" aria-label="Port stock by material over time"></svg>
+        <div class="legend" id="port-legend"></div>
+      </div>
+      <div class="section">
+        <h2>Port piles, change vs drone survey</h2>
+        <div class="tbl-wrap"><table id="port-table"><thead></thead><tbody></tbody></table></div>
+      </div>
+      <div class="note" id="monitor-note"></div>
+    </section>
+
+    <section class="pane" data-pane="valid" hidden>
+      <div class="section">
+        <h2>Satellite total vs drone total</h2>
+        <p class="sub">Each pile is predicted by a model that never saw it, then all piles are added up. Per-pile errors largely cancel in the site total, which is the figure stock accounting uses.</p>
+        <div class="tiles" id="tot-tiles"></div>
+        <svg class="chart" id="tot-chart" viewBox="0 0 400 200" role="img" aria-label="Drone total and satellite total per model"></svg>
+      </div>
+      <div class="section">
+        <h2>Accuracy grows with pile size</h2>
+        <p class="sub">Per-pile error (WAPE) for piles above each size. Large piles, where most of the stock sits, are measured best.</p>
+        <svg class="chart" id="size-chart" viewBox="0 0 400 210" role="img" aria-label="Per-pile error by minimum pile size"></svg>
+        <div class="legend" id="size-legend"></div>
+      </div>
+      <div class="section">
+        <h2>Drone vs satellite, per pile</h2>
+        <div class="row"><div class="seg" id="sc-sensor"></div></div>
+        <svg class="chart" id="scatter" viewBox="0 0 400 320" role="img" aria-label="Drone volume against satellite estimate per pile"></svg>
+        <p class="sub">Log scales. Points on the diagonal are exact; the dashed band is ±50 %. Click a point to open the pile.</p>
+      </div>
+      <div class="note" id="valid-note"></div>
+    </section>
+
+    <section class="pane method" data-pane="method" hidden>
+      <div class="section" id="method-body"></div>
+    </section>
+  </aside>
+
+  <main class="mapwrap">
+    <div id="map"></div>
+    <div class="loading" id="loading">Loading survey data…</div>
+    <div class="mapctl ctl-layers" id="ctl-layers">
+      <span class="ctl-title">Area 3 imagery</span>
+      <select id="port-img" aria-label="Port imagery date"></select>
+      <span class="ctl-title">Overlays</span>
+      <label><input type="checkbox" id="lyr-piles" checked> Stockpiles</label>
+      <label><input type="checkbox" id="lyr-assets"> Thermal assets</label>
+      <label><input type="checkbox" id="lyr-height"> Height above ground</label>
+      <label><input type="checkbox" id="lyr-lst"> Surface heat map</label>
+      <span class="ctl-title">Colour piles by</span>
+      <div class="seg" id="colorby"><button aria-pressed="true" data-c="material">Material</button><button aria-pressed="false" data-c="volume">Volume</button><button aria-pressed="false" data-c="alert">Heat</button></div>
+    </div>
+    <div class="mapctl ctl-tools" role="toolbar" aria-label="Map tools">
+      <button class="tbtn" id="t-tour" aria-pressed="false">Guided tour</button>
+      <button class="tbtn" id="t-swipe" aria-pressed="false">Compare dates</button>
+      <button class="tbtn" id="t-vol" aria-pressed="false">Measure volume</button>
+      <button class="tbtn" id="t-prof" aria-pressed="false">Profile</button>
+    </div>
+    <div class="watermark" aria-hidden="true">SOLAIN</div>
+    <div class="swipe" id="swipe" hidden><span id="swipe-knob" title="Drag to compare">⇆</span></div>
+    <div class="swipelab" id="swipe-l" hidden></div><div class="swipelab" id="swipe-r" hidden></div>
+    <div class="tour" id="tour" hidden></div>
+    <div class="mapctl ctl-legend" id="legend"></div>
+    <div class="card" id="card" hidden></div>
+    <div class="drawhint" id="drawhint" hidden><span id="drawmsg"></span><button id="draw-finish">Finish</button><button id="draw-cancel">Cancel</button></div>
+  </main>
+</div>
+<div class="tip" id="tip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const F=(v,d=0)=>v==null||isNaN(v)?"–":Number(v).toLocaleString("en-GB",{minimumFractionDigits:d,maximumFractionDigits:d});
+const K=v=>v==null?"–":Math.abs(v)>=1e6?F(v/1e6,2)+" M":Math.abs(v)>=1e5?F(v/1e3,0)+" k":Math.abs(v)>=1e4?F(v/1e3,1)+" k":F(v,0);
+const KT=v=>v==null?"–":F(v/1e3,0);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const MAT_COL={coal:"#3987e5",iron_ore:"#d95926",limestone:"#199e70",sand_gravel:"#c98500",scrap_metal:"#d55181",wood_chips:"#9085e9",slag:"#9085e9",coke:"#6da7ec",unknown:"#a8a79d"};
+const ALERT_COL={critical:"#d03b3b",warning:"#ec835a",watch:"#fab219",none:"#8c979f"};
+const VOL_STEPS=[[0,"#cde2fb"],[1000,"#86b6ef"],[5000,"#3987e5"],[15000,"#1c5cab"],[30000,"#0d366b"]];
+const S={};
+
+/* ---------- tooltip ---------- */
+const tip=$("#tip");
+function showTip(e,html){tip.innerHTML=html;tip.style.display="block";const x=Math.min(e.clientX+14,innerWidth-270),y=Math.min(e.clientY+14,innerHeight-80);tip.style.left=x+"px";tip.style.top=y+"px";}
+function hideTip(){tip.style.display="none";}
+
+/* ---------- tabs ---------- */
+$$("nav.tabs button").forEach(b=>b.addEventListener("click",()=>selectTab(b.dataset.tab)));
+function selectTab(t){
+  $$("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
+  $$(".pane").forEach(p=>p.hidden=p.dataset.pane!==t);
+  if(t==="thermal"&&!$("#lyr-assets").checked){$("#lyr-assets").checked=true;toggleLayers();}
+  try{localStorage.setItem("ssm-tab",t);}catch(e){}
+}
+
+/* ---------- sign-in + decryption (AES-GCM, key = PBKDF2(username:password)) ---------- */
+const CRYPTO={salt:"eip7beK2cqOVa2TP9KEwFg==",iter:250000};
+const b64=t=>{const b=atob(t),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;};
+async function deriveKey(user,pass){
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(user.trim()+":"+pass),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt:b64(CRYPTO.salt),iterations:CRYPTO.iter,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+}
+async function dec(name){
+  const r=await fetch("data/"+name+".enc.json");if(!r.ok)throw new Error(name+" "+r.status);
+  const j=await r.json();return crypto.subtle.decrypt({name:"AES-GCM",iv:b64(j.iv)},S.key,b64(j.ct));
+}
+const decJson=async n=>JSON.parse(new TextDecoder().decode(await dec(n)));
+const decUrl=async(n,type)=>URL.createObjectURL(new Blob([await dec(n)],{type}));
+$("#gate-form").addEventListener("submit",async e=>{
+  e.preventDefault();const btn=$("#gate-btn"),err=$("#gate-err");btn.disabled=true;btn.textContent="Unlocking…";err.textContent="";
+  try{
+    if(!window.crypto||!crypto.subtle)throw new Error("nocrypto");
+    S.key=await deriveKey($("#gate-user").value,$("#gate-pass").value);
+    const sum=await decJson("summary.json");
+    S.sum=sum;
+    const [piles,assets,ramps]=await Promise.all(["piles.geojson","assets.geojson","ramps.json"].map(decJson));
+    S.piles=piles;S.assets=assets;S.ramps=ramps.cmaps;S.url={};
+    await Promise.all(Object.values(sum.layers).map(async l=>{S.url[l.file]=await decUrl(l.file,"image/webp");}));
+    $("#gate").hidden=true;init();
+  }catch(x){
+    btn.disabled=false;btn.textContent="Sign in";
+    err.textContent=x&&x.message==="nocrypto"?"This browser cannot decrypt the data. Open the page in a current browser.":x&&x.name==="OperationError"?"Username or password is not correct.":"The site data could not be loaded ("+(x&&x.message||x)+"). Reload and try again.";
+  }
+});
+
+function init(){
+  $("#brand-title").textContent="Stockyard Intelligence · "+(S.sum.company||"");
+  $("#brand-sub").textContent=(S.sum.place?S.sum.place+" works · ":"")+"stockpile volume, material, heat";
+  initMap(); renderChips(); renderPiles(); renderThermal(); renderMonitor(); renderValid(); renderMethod();
+  $("#loading").hidden=true;
+  let t=null;try{t=localStorage.getItem("ssm-tab");}catch(e){}
+  const h=(location.hash||"").slice(1); if(["piles","thermal","monitor","valid","method"].includes(h))t=h;
+  if(t)selectTab(t);
+  dec("dsm_3m.bin").then(b=>{S.dsm=new Uint16Array(b);}).catch(()=>{});
+}
+
+/* ---------- map ---------- */
+function initMap(){
+  const L_=S.sum.layers;
+  const map=L.map("map",{zoomSnap:.25,attributionControl:false,zoomControl:true,maxZoom:21,minZoom:13});
+  S.map=map;
+  map.createPane("base").style.zIndex=200; map.createPane("port").style.zIndex=210; map.createPane("rast").style.zIndex=300;
+  L.imageOverlay(S.url[L_.ortho_site.file],L_.ortho_site.bounds,{pane:"base"}).addTo(map);
+  const ports=[["ortho_port","Drone · 2025-05-01 (0.33 m)"],["spot_20250327","SPOT 6/7 · 2025-03-27 (1.5 m)"],["spot_20260407","SPOT 6/7 · 2026-04-07 (1.5 m)"],["pleiades_20260803","Pléiades Neo · 2026-08-03 (0.3 m)"]].filter(p=>L_[p[0]]);
+  S.portLayers={};
+  const sel=$("#port-img");
+  ports.forEach(([k,lab])=>{S.portLayers[k]=L.imageOverlay(S.url[L_[k].file],L_[k].bounds,{pane:"port"});const o=document.createElement("option");o.value=k;o.textContent=lab;sel.appendChild(o);});
+  sel.addEventListener("change",()=>setPort(sel.value)); setPort(ports[0][0]);
+  S.heightLayer=L.imageOverlay(S.url[L_.height.file],L_.height.bounds,{pane:"rast",opacity:.85});
+  S.lstLayer=L.imageOverlay(S.url[L_.lst.file],L_.lst.bounds,{pane:"rast",opacity:.8});
+  S.pileLayer=L.geoJSON(S.piles,{style:pileStyle,onEachFeature:(f,l)=>{
+    const p=f.properties;S.pileIndex=S.pileIndex||{};S.pileIndex[p.id]=l;
+    l.bindTooltip(`<b>${esc(p.id)}</b> · ${esc(p.material_label)}<br>${p.vol!=null?F(p.vol)+" m³":"not in drone survey"}`,{sticky:true});
+    l.on("click",e=>{L.DomEvent.stop(e);if(!S.draw)selectPile(p.id,false);});
+  }}).addTo(map);
+  const tv=S.sum.kpi; const lst=S.assets.features.map(f=>f.properties.max_lst_composite_c).filter(v=>v!=null);
+  S.lstRange=[Math.min(...lst),Math.max(...lst)];
+  S.assetLayer=L.geoJSON(S.assets,{style:assetStyle,onEachFeature:(f,l)=>{
+    const p=f.properties;S.assetIndex=S.assetIndex||{};S.assetIndex[p.object_id]=l;
+    l.bindTooltip(`<b>${esc(p.object_id)}</b> · ${esc(p.class)}<br>peak LST ${F(p.max_lst_composite_c,1)} °C`,{sticky:true});
+    l.on("click",e=>{L.DomEvent.stop(e);if(!S.draw)selectAsset(p.object_id,false);});
+  }});
+  map.fitBounds(L_.ortho_site.bounds,{padding:[10,10]});
+  ["lyr-piles","lyr-assets","lyr-height","lyr-lst"].forEach(id=>$("#"+id).addEventListener("change",toggleLayers));
+  $$("#colorby button").forEach(b=>b.addEventListener("click",()=>{$$("#colorby button").forEach(x=>x.setAttribute("aria-pressed",x===b));S.colorBy=b.dataset.c;S.pileLayer.setStyle(pileStyle);renderLegend();}));
+  S.colorBy="material"; renderLegend(); initTools(); initSwipeDrag();
+  map.on("click",()=>{if(!S.draw)closeCard();});
+}
+function setPort(k){Object.entries(S.portLayers).forEach(([kk,l])=>{if(kk===k)l.addTo(S.map);else S.map.removeLayer(l);});}
+function toggleLayers(){
+  const m=S.map;
+  [["lyr-piles",S.pileLayer],["lyr-assets",S.assetLayer],["lyr-height",S.heightLayer],["lyr-lst",S.lstLayer]].forEach(([id,l])=>{if($("#"+id).checked)l.addTo(m);else m.removeLayer(l);});
+  if($("#lyr-piles").checked)S.pileLayer.bringToFront();
+  renderLegend();
+}
+function volColor(v){let c=VOL_STEPS[0][1];VOL_STEPS.forEach(([t,col])=>{if(v>=t)c=col;});return c;}
+function pileStyle(f){
+  const p=f.properties,sel=S.selPile===p.id;
+  let c=S.colorBy==="alert"?ALERT_COL[p.alert||"none"]:S.colorBy==="volume"?(p.vol!=null?volColor(p.vol):"#8c979f"):(MAT_COL[p.material]||MAT_COL.unknown);
+  return {color:sel?"#ffffff":c,weight:sel?3:1.8,fillColor:c,fillOpacity:p.measured?(S.colorBy==="volume"?.55:.28):.08,dashArray:p.measured?null:"4 4"};
+}
+function lstColor(v){const r=S.ramps.inferno,[a,b]=S.lstRange;const t=Math.max(0,Math.min(1,(v-a)/(b-a)))*(r.length-1),i=Math.floor(t),j=Math.min(i+1,r.length-1),w=t-i;const c=r[i].map((x,k)=>Math.round(x+(r[j][k]-x)*w));return `rgb(${c})`;}
+function assetStyle(f){const p=f.properties,sel=S.selAsset===p.object_id;const c=p.max_lst_composite_c!=null?lstColor(p.max_lst_composite_c):"#777";
+  return {color:sel?"#ffffff":(p.top10pct_hottest?"#ffffff":c),weight:sel?3:(p.top10pct_hottest?1.6:.8),fillColor:c,fillOpacity:.7};}
+function gradCss(name){const r=S.ramps[name];return "linear-gradient(90deg,"+r.map((c,i)=>`rgb(${c}) ${i/(r.length-1)*100}%`).join(",")+")";}
+function renderLegend(){
+  const el=$("#legend");let h="";
+  if($("#lyr-piles").checked){
+    h+=`<span class="ctl-title">Stockpiles · ${S.colorBy==="alert"?"heat alert":S.colorBy==="volume"?"volume (m³)":"indicative material"}</span><div class="legend">`;
+    if(S.colorBy==="material"){const mats=[...new Set(S.piles.features.map(f=>f.properties.material))];mats.forEach(m=>h+=`<span><i class="sw" style="background:${MAT_COL[m]||MAT_COL.unknown}"></i>${esc(S.sum.labels[m]||m)}</span>`);}
+    else if(S.colorBy==="alert"){["critical","warning","watch","none"].forEach(a=>h+=`<span><i class="sw" style="background:${ALERT_COL[a]}"></i>${a==="none"?"No alert":a[0].toUpperCase()+a.slice(1)}</span>`);}
+    else{VOL_STEPS.forEach(([t,c],i)=>h+=`<span><i class="sw" style="background:${c}"></i>${i<VOL_STEPS.length-1?K(t)+"–"+K(VOL_STEPS[i+1][0]):"≥ "+K(t)}</span>`);}
+    h+=`<span><i class="sw" style="border:1px dashed #8c979f"></i>Outside drone survey</span></div>`;
+  }
+  if($("#lyr-lst").checked){const l=S.sum.layers.lst;h+=`<span class="ctl-title">Surface temperature (°C)</span><div class="grad" style="background:${gradCss("inferno")}"></div><div class="gradlab"><span>${F(l.min,1)}</span><span>${F(l.max,1)}</span></div>`;}
+  if($("#lyr-assets").checked){h+=`<span class="ctl-title">Asset peak LST (°C) · white rim = top 10 %</span><div class="grad" style="background:${gradCss("inferno")}"></div><div class="gradlab"><span>${F(S.lstRange[0],1)}</span><span>${F(S.lstRange[1],1)}</span></div>`;}
+  if($("#lyr-height").checked){h+=`<span class="ctl-title">Height above ground (m)</span><div class="grad" style="background:${gradCss("viridis")}"></div><div class="gradlab"><span>0</span><span>20+</span></div>`;}
+  el.innerHTML=h||'<span class="sub">No overlay switched on.</span>';
+}
+
+/* ---------- selection cards ---------- */
+function closeCard(){$("#card").hidden=true;S.selPile=null;S.selAsset=null;S.pileLayer&&S.pileLayer.setStyle(pileStyle);S.assetLayer&&S.assetLayer.setStyle(assetStyle);$$("#pile-table tr.sel").forEach(r=>r.classList.remove("sel"));}
+function openCard(html){const c=$("#card");c.innerHTML='<button class="x" aria-label="Close">×</button>'+html;c.hidden=false;c.querySelector(".x").addEventListener("click",closeCard);c.scrollTop=0;}
+function alertPill(a){return `<span class="pill ${a||"none"}">${a&&a!=="none"?a:"no alert"}</span>`;}
+function selectPile(id,zoom){
+  const l=S.pileIndex[id];if(!l)return;const p=l.feature.properties;
+  S.selPile=id;S.selAsset=null;S.pileLayer.setStyle(pileStyle);S.assetLayer.setStyle(assetStyle);
+  if(!S.map.hasLayer(S.pileLayer)){$("#lyr-piles").checked=true;toggleLayers();}
+  if(zoom)S.map.fitBounds(l.getBounds(),{maxZoom:18,padding:[80,80]});
+  $$("#pile-table tbody tr").forEach(r=>r.classList.toggle("sel",r.dataset.id===id));
+  const f0=S.fac||{};
+  const chg=[["S2 · 2026-08-13",p.chg_s2_0813],["S2 · 2026-09-22",p.chg_s2_0922]].filter(x=>x[1]!=null);
+  const port=[["SPOT · 2026-04-07",p.port_spot_2604],["Pléiades · 2026-08-03",p.port_ple_2608]].filter(x=>x[1]!=null);
+  openCard(`<h3>${esc(p.id)}</h3>
+  <div class="row"><span class="pill none" style="color:${MAT_COL[p.material]||MAT_COL.unknown}"><i class="sw" style="background:currentColor"></i>${esc(p.material_label)}</span>${alertPill(p.alert)}<span class="sub">${esc(p.area||"")}</span></div>
+  ${p.measured?`<div class="kpis"><div class="kpi"><span class="k">Volume</span><span class="v">${F(p.vol)} <small>m³</small></span><span class="n">above ${esc(p.vol_base)} · ± ${F(p.vol_sigma)} m³</span></div>
+  <div class="kpi"><span class="k">Indicative weight</span><span class="v">${p.t!=null?F(p.t)+" <small>t</small>":"–"}</span><span class="n">${p.density?`× ${F(p.density,2)} t/m³ (typical DE)`:"material not classified"}</span></div></div>`:`<p class="note">Outside the drone survey: no measured volume.</p>`}
+  <dl class="kv">
+    <dt>Footprint area</dt><dd>${F(p.area_m2)} m²</dd>
+    <dt>Occupied area (&gt; 0.5 m)</dt><dd>${F(p.occupied_m2)} m²</dd>
+    <dt>Max height</dt><dd>${F(p.h_max,1)} m</dd>
+    <dt>Mean height</dt><dd>${F(p.h_mean,2)} m</dd>
+    <dt>Volume, own toe plane</dt><dd>${F(p.vol_toe)} m³</dd>
+    <dt>Volume, survey ground</dt><dd>${F(p.vol_ground)} m³</dd>
+    <dt>Bulk density (typical DE)</dt><dd>${p.density?F(p.density,2)+" t/m³":"not assigned"}</dd>
+    <dt>Material basis</dt><dd>${esc(p.material_basis==="client"?"visual review":p.material_basis==="spectral_rule"?"colour rule (indicative)":p.material_basis||"–")}</dd>
+  </dl>
+  ${chg.length?`<div class="section"><span class="ctl-title">Change vs drone survey (Sentinel-2)</span><div class="bars">${chg.map(([k,v])=>chgBar(k,v)).join("")}</div></div>`:""}
+  ${port.length?`<div class="section"><span class="ctl-title">Port monitoring (headline base)</span><dl class="kv"><dt>Drone · 2025-05-01</dt><dd>${F(p.vol)} m³</dd>${port.map(([k,v])=>`<dt>${k}</dt><dd>${F(p.vol*v/(p.vol_ground||1))} m³ (${v>=p.vol_ground?"+":""}${F((v/(p.vol_ground||1)-1)*100,0)} %)</dd>`).join("")}</dl></div>`:""}
+  <div class="section"><span class="ctl-title">Heat (${p.n_scenes??"–"} thermal scenes)</span>
+  <dl class="kv">
+    <dt>Mean / max ΔT vs surroundings</dt><dd>${F(p.dT_mean,1)} / ${F(p.dT_max,1)} °C</dd>
+    <dt>Warm in share of scenes</dt><dd>${p.persistence!=null?F(p.persistence*100)+" %":"–"}</dd>
+    <dt>Warm at night</dt><dd>${p.night&&p.night[1]?`${p.night[0]} of ${p.night[1]} passes`:"–"}</dd>
+    <dt>ΔT trend</dt><dd>${p.trend!=null?(p.trend>0?"+":"")+F(p.trend,2)+" °C/month":"–"}</dd>
+    <dt>SWIR fire signal</dt><dd>${p.swir_dates.length?esc(p.swir_dates.join(", ")):"none"}</dd>
+  </dl>${p.alert_reason&&p.alert_reason.length?`<p class="sub">${esc([].concat(p.alert_reason).join("; "))}</p>`:""}</div>`);
+}
+function chgBar(k,v){const w=Math.min(Math.abs(v),50)/50*50;const c=v<0?"var(--ink-2)":"var(--accent)";
+  return `<div class="bar" style="grid-template-columns:120px 1fr 60px"><span>${k}</span><span class="track" style="position:relative"><span style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--muted)"></span><span class="fill" style="position:absolute;${v<0?`right:50%`:`left:50%`};width:${w}%;background:${c};border-radius:${v<0?"4px 0 0 4px":"0 4px 4px 0"}"></span></span><span class="num" style="min-width:0">${v>0?"+":""}${F(v,0)} %</span></div>`;}
+function selectAsset(id,zoom){
+  const l=S.assetIndex[id];if(!l)return;const p=l.feature.properties;
+  S.selAsset=id;S.selPile=null;S.assetLayer.setStyle(assetStyle);S.pileLayer.setStyle(pileStyle);
+  if(!S.map.hasLayer(S.assetLayer)){$("#lyr-assets").checked=true;toggleLayers();}
+  if(zoom)S.map.fitBounds(l.getBounds(),{maxZoom:18,padding:[80,80]});
+  const hs=p.hotspot_equiv_5m_c_median, mn=p.min_detectable_5m_hotspot_c;
+  openCard(`<h3>${esc(p.object_id)}</h3>
+  <div class="row"><span class="pill none">${esc(p.class||"asset")}</span>${alertPill(p.alert)}${p.top10pct_hottest?'<span class="pill critical">top 10 % hottest</span>':""}</div>
+  <div class="kpis"><div class="kpi"><span class="k">Peak LST (composite)</span><span class="v">${F(p.max_lst_composite_c,1)} <small>°C</small></span><span class="n">downscaled 3 m: ${F(p.max_lst_downscaled_c,1)} °C</span></div>
+  <div class="kpi"><span class="k">Mean ΔT</span><span class="v">${F(p.mean_delta_t_c,1)} <small>°C</small></span><span class="n">max ${F(p.max_delta_t_c,1)} °C</span></div></div>
+  <dl class="kv">
+    <dt>Footprint</dt><dd>${F(p.area_m2)} m²</dd>
+    <dt>Height</dt><dd>${p.max_height_m!=null?F(p.max_height_m,1)+" m":"–"}</dd>
+    <dt>Thermal scenes</dt><dd>${p.n_scenes??"–"}</dd>
+    <dt>Warm in share of scenes</dt><dd>${p.persistence!=null?F(p.persistence*100)+" %":"–"}</dd>
+    <dt>Warm by day</dt><dd>${p.day_persistence!=null?F(p.day_persistence*100)+" %":"–"}</dd>
+    <dt>Warm at night</dt><dd>${p.n_night_scenes?`${p.n_night_anomalous} of ${p.n_night_scenes} passes`:"–"}</dd>
+    <dt>Night result vs chance</dt><dd>${p.p_value_night!=null?(p.persistent_anomaly?"significant":"not significant")+` (p = ${F(p.p_value_night,3)})`:"–"}</dd>
+    <dt>ΔT trend</dt><dd>${p.delta_t_trend_c_per_month!=null?(p.delta_t_trend_c_per_month>0?"+":"")+F(p.delta_t_trend_c_per_month,2)+" °C/month":"–"}</dd>
+  </dl>
+  <div class="section"><span class="ctl-title">Could a small hot spot explain it?</span>
+  <p class="sub">A single 5 × 5 m hot spot would need about <b>${F(hs)} °C</b> to raise this pixel as observed; the smallest the sensor can separate from noise is about ${F(mn)} °C. ${hs!=null&&hs<600?"A hot spot is physically plausible.":"That is not realistic for a building: the excess is broad warming (roof material, sun, process heat), not one hot point."}</p></div>
+  ${p.alert_reason&&p.alert_reason.length?`<p class="sub">${esc([].concat(p.alert_reason).join("; "))}</p>`:""}`);
+}
+
+/* ---------- header chips ---------- */
+function renderChips(){
+  const s=S.sum,k=s.kpi;
+  $("#chips").innerHTML=[`Drone survey ${s.uav_date}`,`${k.n_measured} piles measured`,`${k.assets} buildings · ${k.n_thermal_scenes} thermal scenes`,`Satellite to 2026-09-22`].map(t=>`<span class="chip">${t}</span>`).join("");
+}
+
+/* ---------- stockpiles tab ---------- */
+function renderPiles(){
+  const k=S.sum.kpi, meas=S.piles.features.map(f=>f.properties).filter(p=>p.measured);
+  const unk=k.vol_unclassified||0;
+  $("#kpi-piles").innerHTML=`
+   <div class="kpi"><span class="k">Stock volume</span><span class="v">${K(k.vol)} <small>m³</small></span><span class="n">Areas 1–2 own base · Area 3 quay deck</span></div>
+   <div class="kpi"><span class="k">Indicative weight</span><span class="v">${KT(k.t)} <small>kt</small></span><span class="n">typical German bulk densities; ${K(unk)} m³ unclassified</span></div>
+   <div class="kpi"><span class="k">Piles</span><span class="v">${k.n_measured} <small>/ ${k.n_piles}</small></span><span class="n">measured / detected</span></div>
+   <div class="kpi"><span class="k">Stockpiled area</span><span class="v">${F(k.area/1e4,2)} <small>ha</small></span><span class="n">pile footprints</span></div>`;
+  const bm=Object.entries(k.by_material).sort((a,b)=>b[1].vol-a[1].vol), mx=Math.max(...bm.map(x=>x[1].vol));
+  $("#mat-bars").innerHTML=bm.map(([m,v])=>`<div class="bar" data-m="${m}"><span>${esc(S.sum.labels[m]||m)} <span class="sub">(${v.n})</span></span><span class="track"><span class="fill" style="display:block;width:${v.vol/mx*100}%;background:${MAT_COL[m]||MAT_COL.unknown}"></span></span><span class="num">${K(v.vol)} m³${v.t?` · ${KT(v.t)} kt`:""}</span></div>`).join("");
+  $$("#mat-bars .bar").forEach(b=>{b.addEventListener("mousemove",e=>{const v=k.by_material[b.dataset.m];showTip(e,`<b>${esc(S.sum.labels[b.dataset.m]||b.dataset.m)}</b><br>${v.n} piles · ${F(v.vol)} m³<br>${F(v.area)} m² footprint${v.t?`<br>${F(v.t)} t at ${F(v.density,2)} t/m³`:"<br>no density: material not classified"}`);});b.addEventListener("mouseleave",hideTip);});
+  $("#mat-note").textContent="Materials are indicative: set by visual review where marked, otherwise from pile colour and texture. Weight = volume × typical German loose bulk density (Schüttdichte) of the material; the site's own densities replace these in operation.";
+  const mats=[...new Set(S.piles.features.map(f=>f.properties.material))];
+  S.matOn=new Set(mats);
+  $("#mat-filter").innerHTML=mats.map(m=>`<button class="fchip" aria-pressed="true" data-m="${m}"><i class="sw" style="background:${MAT_COL[m]||MAT_COL.unknown}"></i>${esc(S.sum.labels[m]||m)}</button>`).join("");
+  $$("#mat-filter .fchip").forEach(b=>b.addEventListener("click",()=>{const m=b.dataset.m;S.matOn.has(m)?S.matOn.delete(m):S.matOn.add(m);b.setAttribute("aria-pressed",S.matOn.has(m));drawTable();}));
+  S.sort={k:"vol",d:-1};
+  const cols=[["id","Pile","l"],["area","Area","l"],["material_label","Material","l"],["area_m2","Footprint m²"],["h_max","H max m"],["vol","Vol m³"],["t","Weight t"],["alert","Heat","l"]];
+  $("#pile-table thead").innerHTML="<tr>"+cols.map(c=>`<th class="${c[2]||""}" data-k="${c[0]}" scope="col">${c[1]}</th>`).join("")+"</tr>";
+  $$("#pile-table th").forEach(th=>th.addEventListener("click",()=>{const kk=th.dataset.k;S.sort=S.sort.k===kk?{k:kk,d:-S.sort.d}:{k:kk,d:["id","material_label","alert","area"].includes(kk)?1:-1};drawTable();}));
+  $("#pile-search").addEventListener("input",drawTable);
+  drawTable();
+}
+function drawTable(){
+  const q=$("#pile-search").value.trim().toLowerCase(),{k,d}=S.sort;
+  const rank={critical:3,warning:2,watch:1,none:0};
+  let rows=S.piles.features.map(f=>f.properties).filter(p=>S.matOn.has(p.material)&&(!q||p.id.toLowerCase().includes(q)||p.material_label.toLowerCase().includes(q)));
+  rows.sort((a,b)=>{let x=a[k],y=b[k];if(k==="alert"){x=rank[x]||0;y=rank[y]||0;}if(x==null)return 1;if(y==null)return -1;return (x>y?1:x<y?-1:0)*d;});
+  $("#reg-count").textContent=`${rows.length} shown · ${F(rows.reduce((a,p)=>a+(p.vol||0),0))} m³`;
+  $("#pile-table tbody").innerHTML=rows.map(p=>`<tr data-id="${esc(p.id)}" class="${S.selPile===p.id?"sel":""}"><td class="l">${esc(p.id)}</td><td class="l">${esc((p.area||"").replace(" · port",""))}</td><td class="l"><i class="sw" style="background:${MAT_COL[p.material]||MAT_COL.unknown}"></i> ${esc(p.material_label)}</td><td>${F(p.area_m2)}</td><td>${F(p.h_max,1)}</td><td>${p.measured?F(p.vol):"–"}</td><td>${p.t!=null?F(p.t):"–"}</td><td class="l">${p.alert&&p.alert!=="none"?alertPill(p.alert):""}</td></tr>`).join("");
+  $$("#pile-table tbody tr").forEach(r=>r.addEventListener("click",()=>selectPile(r.dataset.id,true)));
+}
+
+/* ---------- thermal tab ---------- */
+function renderThermal(){
+  const k=S.sum.kpi,A=S.assets.features.map(f=>f.properties);
+  const sig=A.filter(p=>p.significant_vs_noise).length;
+  $("#kpi-thermal").innerHTML=`
+   <div class="kpi"><span class="k">Buildings profiled</span><span class="v">${k.assets}</span><span class="n">${S.sum.asset_source==="client_polygons"?"your building outlines":"roofs, stacks, pipes (detected)"}</span></div>
+   <div class="kpi"><span class="k">Top-10 % threshold</span><span class="v">${F(k.top10_threshold_c,1)} <small>°C</small></span><span class="n">${k.assets_top10} assets above it</span></div>
+   <div class="kpi"><span class="k">Warm at night</span><span class="v">${k.assets_night}</span><span class="n">more often than chance</span></div>
+   <div class="kpi"><span class="k">Pile heat alerts</span><span class="v">${k.alerts.critical}<small> crit</small> ${k.alerts.warning}<small> warn</small></span><span class="n">${k.alerts.watch} on watch</span></div>`;
+  const hot=[...A].filter(p=>p.max_lst_composite_c!=null).sort((a,b)=>b.max_lst_composite_c-a.max_lst_composite_c).slice(0,12);
+  $("#hot-list").innerHTML=hot.map(p=>`<button data-id="${esc(p.object_id)}"><span class="t">${esc(p.object_id)} · ${esc(p.class)}</span><span class="m">${F(p.max_lst_composite_c,1)} °C</span><span class="s">ΔT ${F(p.mean_delta_t_c,1)} °C mean · warm in ${p.persistence!=null?F(p.persistence*100):"–"} % of scenes${p.n_night_scenes?` · night ${p.n_night_anomalous}/${p.n_night_scenes}`:""}${p.persistent_anomaly?" · persistent":""}</span></button>`).join("");
+  $$("#hot-list button").forEach(b=>b.addEventListener("click",()=>selectAsset(b.dataset.id,true)));
+  const P=S.piles.features.map(f=>f.properties).filter(p=>p.alert&&p.alert!=="none");
+  const rank={critical:3,warning:2,watch:1};
+  P.sort((a,b)=>(rank[b.alert]-rank[a.alert])||((b.dT_max||0)-(a.dT_max||0)));
+  $("#alert-list").innerHTML=P.length?P.map(p=>`<button data-id="${esc(p.id)}"><span class="t">${esc(p.id)} · ${esc(p.material_label)}</span><span class="m">${alertPill(p.alert)}</span><span class="s">${esc([].concat(p.alert_reason||[]).join("; "))||"–"}</span></button>`).join(""):'<p class="sub" style="padding:8px">No pile alerts.</p>';
+  $$("#alert-list button").forEach(b=>b.addEventListener("click",()=>selectPile(b.dataset.id,true)));
+  histogram($("#lst-hist"),A.map(p=>p.max_lst_composite_c).filter(v=>v!=null),k.top10_threshold_c);
+  $("#thermal-note").innerHTML=`Landsat 8/9 (100 m thermal) and ECOSTRESS (70 m), ${k.n_thermal_scenes} scenes, downscaled to 3 m with the optical imagery. A chimney or roof is a small part of one thermal pixel, so each asset card also shows the temperature a 5 × 5 m hot spot would need to explain the reading, and what the sensor can resolve. ${esc(S.sum.asset_note||"")}`;
+}
+function histogram(svg,vals,thr){
+  const W=400,H=170,m={l:34,r:8,t:10,b:28},lo=Math.floor(Math.min(...vals)),hi=Math.ceil(Math.max(...vals)),nb=Math.max(8,Math.min(24,hi-lo));
+  const bw=(hi-lo)/nb,counts=new Array(nb).fill(0);vals.forEach(v=>counts[Math.min(nb-1,Math.floor((v-lo)/bw))]++);
+  const mx=Math.max(...counts),x=v=>m.l+(v-lo)/(hi-lo)*(W-m.l-m.r),y=c=>H-m.b-c/mx*(H-m.t-m.b);
+  let s="";[0,.5,1].forEach(f=>{const c=Math.round(mx*f);s+=`<line class="grid" x1="${m.l}" x2="${W-m.r}" y1="${y(c)}" y2="${y(c)}"/><text x="${m.l-6}" y="${y(c)+4}" text-anchor="end">${c}</text>`;});
+  counts.forEach((c,i)=>{const x0=x(lo+i*bw)+1,x1=x(lo+(i+1)*bw)-1,v0=lo+i*bw;const hot=thr!=null&&v0>=thr-1e-9;
+    s+=`<path d="M${x0},${H-m.b} V${y(c)+(c?3:0)} q0,-3 3,-3 H${x1-3} q3,0 3,3 V${H-m.b} Z" fill="${hot?"#d03b3b":"var(--accent)"}" opacity="${hot?1:.75}" data-t="${F(v0,1)}–${F(v0+bw,1)} °C: ${c} assets"/>`;});
+  const ticks=5;for(let i=0;i<=ticks;i++){const v=lo+(hi-lo)*i/ticks;s+=`<text x="${x(v)}" y="${H-m.b+15}" text-anchor="middle">${F(v,0)}</text>`;}
+  s+=`<text x="${(W+m.l)/2}" y="${H-2}" text-anchor="middle">peak LST, °C</text>`;
+  if(thr!=null){s+=`<line x1="${x(thr)}" x2="${x(thr)}" y1="${m.t}" y2="${H-m.b}" stroke="var(--ink)" stroke-dasharray="3 3"/><text class="val" x="${x(thr)-4}" y="${m.t+10}" text-anchor="end">top 10 % ≥ ${F(thr,1)} °C</text>`;}
+  svg.innerHTML=s;svg.querySelectorAll("path").forEach(p=>{p.addEventListener("mousemove",e=>showTip(e,p.dataset.t));p.addEventListener("mouseleave",hideTip);});
+}
+
+/* ---------- monitoring tab ---------- */
+function lineChart(svg,series,opts){
+  const W=400,H=opts.h||210,m={l:46,r:92,t:14,b:34};
+  const xs=[...new Set(series.flatMap(s=>s.pts.map(p=>p.x)))].sort();const t=d=>new Date(d).getTime();
+  const x0=t(xs[0]),x1=t(xs[xs.length-1]);const ymax=opts.ymax||Math.max(...series.flatMap(s=>s.pts.map(p=>p.y)))*1.12;
+  const X=d=>m.l+(t(d)-x0)/(x1-x0||1)*(W-m.l-m.r),Y=v=>H-m.b-v/ymax*(H-m.t-m.b);
+  let s="";const step=Math.pow(10,Math.floor(Math.log10(ymax/2)));const nt=Math.ceil(ymax/step);const inc=nt>6?step*2:step;
+  for(let v=0;v<=ymax;v+=inc){s+=`<line class="grid" x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${m.l-6}" y="${Y(v)+4}" text-anchor="end">${K(v)}</text>`;}
+  xs.forEach(d=>{s+=`<text x="${X(d)}" y="${H-m.b+15}" text-anchor="middle">${d.slice(0,7)}</text>`;});
+  series.forEach(se=>{
+    const pts=se.pts;
+    for(let i=1;i<pts.length;i++){s+=`<line x1="${X(pts[i-1].x)}" y1="${Y(pts[i-1].y)}" x2="${X(pts[i].x)}" y2="${Y(pts[i].y)}" stroke="${se.color}" stroke-width="2" ${pts[i].weak?'stroke-dasharray="5 4"':""}/>`;}
+    pts.forEach(p=>{s+=`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="5" fill="${p.x===pts[0].x?se.color:"var(--panel)"}" stroke="${se.color}" stroke-width="2" ${p.weak?'stroke-dasharray="2 2"':""} data-t="<b>${esc(se.name)}</b><br>${p.x} · ${esc(p.src)}<br>${F(p.y)} m³${p.note?"<br>"+esc(p.note):""}"/>`;});
+    const last=pts[pts.length-1];s+=`<text class="lbl" x="${X(last.x)+9}" y="${Y(last.y)+4}">${esc(se.name)} ${K(last.y)}</text>`;
+  });
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.innerHTML=s;
+  svg.querySelectorAll("circle").forEach(c=>{c.addEventListener("mousemove",e=>showTip(e,c.dataset.t));c.addEventListener("mouseleave",hideTip);});
+}
+function renderMonitor(){
+  const s=S.sum,rec=s.s2_recent;
+  if(rec&&rec.scenes&&rec.scenes.length){
+    const PP=S.piles.features.map(f=>f.properties).filter(p=>p.measured&&p.block!=="DSM_3"&&p.chg_s2_0813!=null&&p.chg_s2_0922!=null);
+    const v0=PP.reduce((a,p)=>a+p.vol,0),v1=PP.reduce((a,p)=>a+p.vol*(1+p.chg_s2_0813/100),0),v2=PP.reduce((a,p)=>a+p.vol*(1+p.chg_s2_0922/100),0);
+    lineChart($("#site-trend"),[{name:"Areas 1–2",color:"var(--accent)",pts:[{x:s.uav_date,y:v0,src:"drone survey"},{x:"2026-08-13",y:v1,src:"Sentinel-2 10 m",note:`${F((v1/v0-1)*100,1)} % vs drone`},{x:"2026-09-22",y:v2,src:"Sentinel-2 10 m",note:`${F((v2/v0-1)*100,1)} % vs drone`}]}],{});
+  } else $("#site-trend").outerHTML='<p class="sub">No Sentinel-2 monitoring in this run.</p>';
+  const port=s.port, P=S.piles.features.map(f=>f.properties).filter(p=>p.block==="DSM_3"&&p.measured);
+  if(port){
+    const sum=(f,cond)=>P.filter(cond).reduce((a,p)=>a+(p[f]||0),0);
+    const isScrap=p=>(p.port_class||p.material)==="scrap_metal";
+    const tr=(port.transfer||[]).find(t=>t.sensor==="pleiades");
+    const sc_=(p,f)=>p[f]!=null&&p.vol_ground?p.vol*p[f]/p.vol_ground:0;
+    const tot=(f,cond)=>P.filter(cond).reduce((a,p)=>a+(f?sc_(p,f):p.vol),0);
+    const mk=(name,color,cond)=>{const pts=[{x:s.uav_date,y:tot(null,cond),src:"drone survey"},{x:"2026-04-07",y:tot("port_spot_2604",cond),src:"SPOT 6/7, calibrated on the 2025 survey"}];
+      if(tr)pts.push({x:"2026-08-03",y:tot("port_ple_2608",cond),src:"Pléiades Neo through the SPOT model",weak:true,note:"cross-sensor, indicative"});return {name,color,pts};};
+    lineChart($("#port-trend"),[mk("Total","var(--ink)",()=>true),mk("Bulk","#3987e5",p=>!isScrap(p)),mk("Scrap","#d55181",isScrap)],{h:230});
+    const st=port.study||{};const h=st.height_chain_raw||{};
+    $("#port-sub").textContent=`Area 3, volume above the quay deck. SPOT model: ${F(h.wape_pct,0)} % error on unseen piles; erase test ${st.sensitivity?F(-100*st.sensitivity.height_response,0)+" %":"–"}.`;
+    $("#port-legend").innerHTML=`<span><i class="sw" style="background:var(--ink)"></i>Total</span><span><i class="sw" style="background:#3987e5"></i>Bulk (coal, ore, other)</span><span><i class="sw" style="background:#d55181"></i>Scrap metal</span><span>dashed = low confidence</span>`;
+    const cols=["Pile","Material","Drone m³","Apr 2026","Aug 2026"];
+    $("#port-table thead").innerHTML="<tr>"+cols.map((c,i)=>`<th class="${i<2?"l":""}">${c}</th>`).join("")+"</tr>";
+    const pct=(a,b)=>a&&b!=null?` <span class="sub">${b>=a?"+":""}${F((b/a-1)*100,0)}%</span>`:"";
+    $("#port-table tbody").innerHTML=P.sort((a,b)=>(b.vol||0)-(a.vol||0)).map(p=>`<tr data-id="${esc(p.id)}"><td class="l">${esc(p.id)}</td><td class="l">${esc(p.material_label)}</td><td>${F(p.vol)}</td><td>${F(sc_(p,"port_spot_2604"))}${pct(p.vol_ground,p.port_spot_2604)}</td><td>${F(sc_(p,"port_ple_2608"))}${pct(p.vol_ground,p.port_ple_2608)}</td></tr>`).join("");
+    $$("#port-table tbody tr").forEach(r=>r.addEventListener("click",()=>selectPile(r.dataset.id,true)));
+    const fit=tr&&tr.radiometric_fit?Object.entries(tr.radiometric_fit).map(([b,v])=>`${b} ${F(v.r2,2)}`).join(", "):"–";
+    $("#monitor-note").innerHTML=`<b>How to read this.</b> Each later volume is the drone volume scaled by the model's change for that pile, so the model's own bias cancels. Changes under about 15 % are within noise for SPOT. August 2026 comes from Pléiades Neo run through the SPOT-calibrated model, because no 2025 Pléiades image covers the port; the two sensors' colours match only weakly (R² ${fit}), so treat that point as indicative.`;
+  }
+}
+
+/* ---------- validation tab ---------- */
+const MODELS=[
+  {key:"s2_sr_3m:pc",name:"Sentinel-2, sharpened to 3 m",short:"Sentinel-2 3 m",ref:"uav",col:"#3987e5"},
+  {key:"pleiades:raw",name:"Pléiades Neo",short:"Pléiades",ref:"uav",col:"#d95926"},
+  {key:"spot:loo",name:"SPOT 6/7 · Area 3",short:"SPOT · Area 3",ref:"uav_port",col:"#199e70"},
+  {key:"s2_10m:bc",name:"Sentinel-2, 10 m",short:"Sentinel-2 10 m",ref:"uav",col:"#c98500"}];
+function stats(m,minV){const rows=S.sum.scatter.filter(r=>r[m.key]&&r[m.ref]&&(!minV||r[m.ref]>=minV));
+  const u=rows.reduce((a,r)=>a+r[m.ref],0),v=rows.reduce((a,r)=>a+r[m.key],0),w=rows.reduce((a,r)=>a+Math.abs(r[m.key]-r[m.ref]),0);
+  return {n:rows.length,u,v,diff:u?(v/u-1)*100:null,wape:u?w/u*100:null,rows};}
+function renderValid(){
+  const ms=MODELS.map(m=>({...m,...stats(m)})).filter(m=>m.n>=4);S.models=ms;
+  $("#tot-tiles").innerHTML=ms.slice(0,3).map(m=>`<div class="kpi"><span class="k">${esc(m.short)}</span><span class="big ${Math.abs(m.diff)<3?"good":""}">${m.diff>=0?"+":""}${F(m.diff,1)} %</span><span class="n">total vs drone · ${m.n} piles</span></div>`).join("");
+  // paired bars: drone total vs satellite total
+  const svg=$("#tot-chart"),W=400,rowH=40,H=ms.length*rowH+34,m0={l:112,r:62,t:8};const mx=Math.max(...ms.map(m=>Math.max(m.u,m.v)));
+  const X=v=>m0.l+v/mx*(W-m0.l-m0.r);let g="";
+  ms.forEach((m,i)=>{const y=m0.t+i*rowH;
+    g+=`<text class="lbl" x="${m0.l-8}" y="${y+17}" text-anchor="end">${esc(m.short)}</text>`;
+    g+=`<path d="M${m0.l},${y+4} H${X(m.u)-4} q4,0 4,4 V${y+12} q0,4 -4,4 H${m0.l} Z" fill="var(--muted)" opacity=".55" data-t="<b>Drone total</b><br>${m.n} piles · ${F(m.u)} m³"/>`;
+    g+=`<path d="M${m0.l},${y+18} H${X(m.v)-4} q4,0 4,4 V${y+26} q0,4 -4,4 H${m0.l} Z" fill="${m.col}" data-t="<b>${esc(m.name)} total</b><br>${F(m.v)} m³ (${m.diff>=0?"+":""}${F(m.diff,1)} %)<br>per-pile error ${F(m.wape,0)} %"/>`;
+    g+=`<text class="val" x="${Math.max(X(m.u),X(m.v))+6}" y="${y+22}">${K(m.v)} m³</text>`;});
+  g+=`<g transform="translate(${m0.l},${H-12})"><rect width="10" height="10" fill="var(--muted)" opacity=".55"/><text x="14" y="9">drone survey</text><rect x="100" width="10" height="10" fill="var(--ink-2)"/><text x="114" y="9">satellite model (colour per model)</text></g>`;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.innerHTML=g;
+  svg.querySelectorAll("path").forEach(p=>{p.addEventListener("mousemove",e=>showTip(e,p.dataset.t));p.addEventListener("mouseleave",hideTip);});
+  // accuracy by pile size
+  const TH=[0,1000,2500,5000,10000,20000];
+  const series=ms.slice(0,3).map(m=>({m,pts:TH.map(t=>{const st=stats(m,t);return st.n>=4?{t,w:st.wape,n:st.n}:null;}).filter(Boolean)}));
+  const s2=$("#size-chart"),W2=400,H2=210,mm={l:40,r:14,t:10,b:34},ymax=Math.max(60,...series.flatMap(x=>x.pts.map(p=>p.w)))*1.05;
+  const X2=i=>mm.l+i/(TH.length-1)*(W2-mm.l-mm.r),Y2=v=>H2-mm.b-v/ymax*(H2-mm.t-mm.b);let h="";
+  for(let v=0;v<=ymax;v+=20)h+=`<line class="grid" x1="${mm.l}" x2="${W2-mm.r}" y1="${Y2(v)}" y2="${Y2(v)}"/><text x="${mm.l-6}" y="${Y2(v)+4}" text-anchor="end">${v} %</text>`;
+  TH.forEach((t,i)=>h+=`<text x="${X2(i)}" y="${H2-mm.b+15}" text-anchor="middle">${t?"≥ "+K(t):"all"}</text>`);
+  h+=`<text x="${(W2+mm.l)/2}" y="${H2-2}" text-anchor="middle">pile size, m³</text>`;
+  series.forEach(({m,pts})=>{const xy=pts.map(p=>[X2(TH.indexOf(p.t)),Y2(p.w)]);
+    h+=`<path d="M${xy.map(q=>q.join(",")).join(" L")}" fill="none" stroke="${m.col}" stroke-width="2"/>`;
+    pts.forEach((p,i)=>h+=`<circle cx="${xy[i][0]}" cy="${xy[i][1]}" r="4.5" fill="var(--panel)" stroke="${m.col}" stroke-width="2" data-t="<b>${esc(m.name)}</b><br>piles ${p.t?"≥ "+F(p.t)+" m³":"all"}: ${p.n}<br>per-pile error ${F(p.w,0)} %"/>`);});
+  s2.innerHTML=h;s2.querySelectorAll("circle").forEach(c=>{c.addEventListener("mousemove",e=>showTip(e,c.dataset.t));c.addEventListener("mouseleave",hideTip);});
+  $("#size-legend").innerHTML=series.map(({m})=>`<span><i class="sw" style="background:${m.col}"></i>${esc(m.name)}</span>`).join("");
+  // scatter selector
+  $("#sc-sensor").innerHTML=ms.map((m,i)=>`<button aria-pressed="${i===0}" data-i="${i}">${esc(m.short)}</button>`).join("");
+  $$("#sc-sensor button").forEach(b=>b.addEventListener("click",()=>{$$("#sc-sensor button").forEach(x=>x.setAttribute("aria-pressed",x===b));scatter(ms[+b.dataset.i]);}));
+  scatter(ms[0]);
+  const spot=ms.find(m=>m.key==="spot:loo"),ple=ms.find(m=>m.key==="pleiades:raw");
+  $("#valid-note").innerHTML=`<b>Why the SPOT figure is tighter than the Pléiades figure.</b> The two numbers come from different tests, not from better or worse sensors. SPOT was calibrated and tested inside one yard (Area 3, ${spot?spot.n:"21"} piles, one ground level, similar materials): each pile is predicted from the other piles of the same yard. The Pléiades test spans the whole works (${ple?ple.n:"77"} piles in Areas 1–2): white limestone, black coal and ore beds side by side, and it is scored against drone heights in Area 1, where the terrain model follows the tops of the piles, so the reference itself is uncertain there. Pléiades Neo is the sharper image (0.3 m) and gives the best pile outlines; with a site-specific calibration like the SPOT one, its per-pile error is expected to fall the same way. Every model also passes the erase test: remove a pile from the image and its volume must drop.`;
+}
+function scatter(m){
+  const svg=$("#scatter"),W=400,H=320,mg={l:52,r:12,t:10,b:40};
+  const pts=S.sum.scatter.filter(p=>p[m.ref]>0&&p[m.key]>0);
+  if(!pts.length){svg.innerHTML=`<text x="200" y="160" text-anchor="middle">No per-pile predictions for this model.</text>`;return;}
+  const all=pts.flatMap(p=>[p[m.ref],p[m.key]]);const lo=Math.pow(10,Math.floor(Math.log10(Math.min(...all)))),hi=Math.pow(10,Math.ceil(Math.log10(Math.max(...all))));
+  const L10=Math.log10,X=v=>mg.l+(L10(v)-L10(lo))/(L10(hi)-L10(lo))*(W-mg.l-mg.r),Y=v=>H-mg.b-(L10(v)-L10(lo))/(L10(hi)-L10(lo))*(H-mg.t-mg.b);
+  let s="";for(let d=lo;d<=hi;d*=10){s+=`<line class="grid" x1="${X(d)}" x2="${X(d)}" y1="${mg.t}" y2="${H-mg.b}"/><line class="grid" x1="${mg.l}" x2="${W-mg.r}" y1="${Y(d)}" y2="${Y(d)}"/><text x="${X(d)}" y="${H-mg.b+15}" text-anchor="middle">${K(d)}</text><text x="${mg.l-6}" y="${Y(d)+4}" text-anchor="end">${K(d)}</text>`;}
+  s+=`<path d="M${X(lo)},${Y(lo*1.5)} L${X(hi/1.5)},${Y(hi)} M${X(lo*1.5)},${Y(lo)} L${X(hi)},${Y(hi/1.5)}" stroke="var(--muted)" stroke-dasharray="4 4" fill="none"/>`;
+  s+=`<line x1="${X(lo)}" y1="${Y(lo)}" x2="${X(hi)}" y2="${Y(hi)}" stroke="var(--ink-2)" stroke-width="1.5"/>`;
+  s+=`<text x="${(W+mg.l)/2}" y="${H-4}" text-anchor="middle">drone volume, m³</text><text transform="translate(12,${(H-mg.b+mg.t)/2}) rotate(-90)" text-anchor="middle">${esc(m.short)} estimate, m³</text>`;
+  const st=stats(m);s+=`<text class="val" x="${mg.l+8}" y="${mg.t+14}">${st.n} piles · total ${st.diff>=0?"+":""}${F(st.diff,1)} % · per pile ${F(st.wape,0)} %</text>`;
+  pts.forEach(p=>{s+=`<circle cx="${X(p[m.ref])}" cy="${Y(p[m.key])}" r="4.5" fill="${m.col}" stroke="var(--panel)" stroke-width="2" data-id="${esc(p.id)}" data-t="<b>${esc(p.id)}</b><br>drone ${F(p[m.ref])} m³<br>${esc(m.short)} ${F(p[m.key])} m³ (${p[m.key]>=p[m.ref]?"+":""}${F((p[m.key]/p[m.ref]-1)*100,0)} %)"/>`;});
+  svg.innerHTML=s;
+  svg.querySelectorAll("circle").forEach(c=>{c.style.cursor="pointer";c.addEventListener("mousemove",e=>showTip(e,c.dataset.t));c.addEventListener("mouseleave",hideTip);c.addEventListener("click",()=>selectPile(c.dataset.id,true));});
+}
+
+/* ---------- method tab ---------- */
+function renderMethod(){
+  const s=S.sum,k=s.kpi,dens=Object.entries(s.density).map(([m,v])=>`<li>${esc(s.labels[m]||m)}: ${F(v,2)} t/m³</li>`).join("");
+  $("#method-body").innerHTML=`
+  <h2>One drone survey, then satellites</h2>
+  <p>A drone survey on ${s.uav_date} is the ruler: three surface models (Area 1 = DSM 1, Area 2 = DSM 2, Area 3 = DSM 3) and one terrain model (DTM 1, covering Areas 1 and 2). Satellites then follow every pile between surveys, calibrated against that ruler.</p>
+  <h2>What is new in this workflow</h2>
+  <ul>
+   <li><b>Foundation depth model for pile relief.</b> Depth Anything V2, a monocular depth model trained on millions of images, turns a single satellite image into a relief map. We feed that relief, with the image bands, shading and texture, into a height model calibrated on the drone survey. It is how a flat image becomes a volume.</li>
+   <li><b>Erase test.</b> Every satellite model must react when a pile is digitally removed from the image; its volume has to drop. Models that score well but do not react (they learn the outline, not the material) are rejected.</li>
+   <li><b>Heat probability, not just temperature.</b> For each pile and building we count how often it is warmer than its surroundings, by day and at night, and test that count against the sensor's own noise rate. The result is a probability that the warmth is real.</li>
+   <li><b>Hot-spot plausibility.</b> A thermal pixel is 70–100 m across. We invert the pixel's radiance (Stefan–Boltzmann mixing) to the temperature a 5 × 5 m hot spot would need to cause the reading, and compare it with what the sensor can resolve, so a warm roof is not mistaken for a fire and a small smouldering spot is not missed.</li>
+  </ul>
+  <h2>How piles are detected</h2>
+  <ul><li>Everything standing above the ground is split into objects, then classed by form: bulk material rests at its angle of repose, buildings have walls and flat tops, wagons and conveyors are thin, trees are green in the near-infrared.</li>
+  <li>Each detected pile is confirmed on the 0.3–0.4 m orthophoto; client outlines are audited against the drone surface. Result: ${k.n_piles} piles, ${k.n_measured} inside the drone survey.</li></ul>
+  <h2>How volume is measured</h2>
+  <ul><li>Height above the ground under the pile, summed on a 1 m grid inside the outline.</li>
+  <li>Areas 1 and 2: the ground is a plane through the pile's own toe. DTM 1 follows the tops of the piles in Area 1, so it cannot serve as the base there.</li>
+  <li>Area 3 (port, no DTM): the quay deck at ${F(s.quay_level_m,2)} m, the flat level above the water.</li>
+  <li>± per pile: footprint × vertical accuracy of the drone surface.</li></ul>
+  <h2>How material is identified</h2>
+  <ul><li>Colour and brightness separate coal, ore, limestone and aggregates; surface roughness (≥ 0.6 m) separates scrap metal from bulk. Port coal and scrap and the Area 1 limestone were confirmed visually; other classes are indicative.</li>
+  <li>Weight = volume × typical German bulk density (Schüttdichte):</li>${dens}</ul>
+  <h2>How heat is measured</h2>
+  <ul><li>Landsat 8/9 and ECOSTRESS surface temperature, ${k.n_thermal_scenes} scenes, sharpened to 3 m with the optical imagery; Sentinel-2 SWIR flags combustion, pooled across neighbouring piles because one SWIR pixel spans both.</li>
+  <li>${k.assets} buildings (client outlines): top 10 % = peak temperature ≥ ${F(k.top10_threshold_c,1)} °C.</li></ul>
+  <h2>Monitoring</h2>
+  <ul><li>Sentinel-2 (free, every few days) follows Areas 1–2; SPOT 6/7 (1.5 m) and Pléiades Neo (0.3 m) follow the port. Each later volume = drone volume × the model's change for that pile, so the model's own bias cancels.</li></ul>
+  <p class="sub">Measure tools use a 3 m copy of the drone surface; the pile register uses the full 1 m result.</p>`;
+}
+
+/* ---------- guided tour ---------- */
+function tourStops(){
+  const s=S.sum,k=s.kpi,P=S.piles.features.map(f=>f.properties);
+  const big=[...P].filter(p=>p.vol).sort((a,b)=>b.vol-a.vol)[0];
+  const hot=P.find(p=>p.alert==="critical")||P.find(p=>p.alert==="warning");
+  const portB=L.featureGroup(Object.values(S.pileIndex).filter(l=>l.feature.properties.block==="DSM_3")).getBounds();
+  const ms=(S.models||[]).slice(0,3).map(m=>`${m.short} ${m.diff>=0?"+":""}${F(m.diff,1)} %`).join(" · ");
+  return [
+   {t:`${esc(s.company)} · ${esc(s.place)}`,d:`${k.n_piles} stockpiles found and measured from one drone survey: ${K(k.vol)} m³, about ${KT(k.t)} kt of classified material.`,go:()=>{closeCard();selectTab("piles");S.map.fitBounds(s.layers.ortho_site.bounds);}},
+   {t:"Largest pile",d:`${esc(big.id)}: ${F(big.vol)} m³ of ${esc(big.material_label.toLowerCase())}, ${F(big.h_max,1)} m high. Every pile has area, height, volume, material and weight.`,go:()=>selectPile(big.id,true)},
+   {t:"Area 3 · port over time",d:"Drag the divider: drone survey (2025) on the left, Pléiades Neo (August 2026) on the right. SPOT and Pléiades follow each pile between drone flights.",go:()=>{closeCard();selectTab("monitor");S.map.fitBounds(portB,{padding:[40,40]});startSwipe("ortho_port","pleiades_20260803");}},
+   ...(hot?[{t:"Heat alert",d:`${esc(hot.id)}: ${esc([].concat(hot.alert_reason||[]).join("; "))}. Heat is scored as a probability against sensor noise, not as a raw temperature.`,go:()=>{stopSwipe();$("#lyr-lst").checked=true;toggleLayers();selectTab("thermal");selectPile(hot.id,true);}}]:[]),
+   {t:"Buildings",d:`${k.assets} buildings profiled; ${k.assets_top10} in the hottest 10 %, ${k.assets_night} warm at night more often than chance.`,go:()=>{closeCard();$("#lyr-lst").checked=false;$("#lyr-assets").checked=true;toggleLayers();selectTab("thermal");S.map.fitBounds(S.assetLayer.getBounds());}},
+   {t:"Satellite accuracy",d:`Site totals against the drone survey: ${ms}. Accuracy improves with pile size, where most of the stock sits.`,go:()=>{closeCard();selectTab("valid");}}];
+}
+function tour(i){
+  const st=S.tour=S.tour||{};st.stops=st.stops||tourStops();st.i=Math.max(0,Math.min(i,st.stops.length-1));const x=st.stops[st.i];
+  $("#tour").hidden=false;$("#t-tour").setAttribute("aria-pressed",true);
+  $("#tour").innerHTML=`<div class="row"><span class="ctl-title">Guided tour · ${st.i+1} / ${st.stops.length}</span><button class="tbtn" id="tour-x" aria-label="Close tour">Close</button></div><h3>${x.t}</h3><p class="sub">${x.d}</p><div class="row"><button class="tbtn" id="tour-p" ${st.i?"":"disabled"}>Back</button><button class="tbtn" id="tour-n" aria-pressed="true">${st.i<st.stops.length-1?"Next":"Finish"}</button></div>`;
+  $("#tour-x").onclick=endTour;$("#tour-p").onclick=()=>tour(st.i-1);$("#tour-n").onclick=()=>st.i<st.stops.length-1?tour(st.i+1):endTour();
+  x.go();
+}
+function endTour(){$("#tour").hidden=true;$("#t-tour").setAttribute("aria-pressed",false);stopSwipe();}
+
+/* ---------- compare dates (swipe) ---------- */
+function startSwipe(left,right){
+  stopSwipe();const L_=S.sum.layers;left=left||$("#port-img").value;right=right||(left==="pleiades_20260803"?"ortho_port":"pleiades_20260803");
+  $("#port-img").value=left;setPort(left);
+  if(!S.map.getPane("portR")){S.map.createPane("portR").style.zIndex=215;}
+  S.swipeLayer=L.imageOverlay(S.url[L_[right].file],L_[right].bounds,{pane:"portR"}).addTo(S.map);
+  S.swipeX=S.map.getSize().x/2;$("#swipe").hidden=false;$("#swipe-l").hidden=false;$("#swipe-r").hidden=false;
+  $("#swipe-l").textContent=L_[left].label;$("#swipe-r").textContent=L_[right].label;
+  $("#t-swipe").setAttribute("aria-pressed",true);S.map.on("move zoom resize",clipSwipe);clipSwipe();
+}
+function stopSwipe(){if(S.swipeLayer){S.map.removeLayer(S.swipeLayer);S.swipeLayer=null;}S.map&&S.map.off("move zoom resize",clipSwipe);["#swipe","#swipe-l","#swipe-r"].forEach(q=>$(q).hidden=true);$("#t-swipe").setAttribute("aria-pressed",false);const p=S.map&&S.map.getPane("portR");if(p)p.style.clip="";}
+function clipSwipe(){
+  const m=S.map,x=Math.max(0,Math.min(S.swipeX,m.getSize().x)),nw=m.containerPointToLayerPoint([0,0]),se=m.containerPointToLayerPoint(m.getSize());
+  m.getPane("portR").style.clip=`rect(${nw.y}px, ${se.x}px, ${se.y}px, ${nw.x+x}px)`;
+  $("#swipe").style.left=x+"px";$("#swipe-l").style.left=Math.max(8,x-10-$("#swipe-l").offsetWidth)+"px";$("#swipe-r").style.left=(x+10)+"px";
+}
+function initSwipeDrag(){
+  const knob=$("#swipe-knob");let drag=false;
+  knob.addEventListener("pointerdown",e=>{drag=true;knob.setPointerCapture(e.pointerId);S.map.dragging.disable();e.preventDefault();});
+  knob.addEventListener("pointermove",e=>{if(!drag)return;const r=S.map.getContainer().getBoundingClientRect();S.swipeX=e.clientX-r.left;clipSwipe();});
+  const up=()=>{if(drag){drag=false;S.map.dragging.enable();}};knob.addEventListener("pointerup",up);knob.addEventListener("pointercancel",up);
+  $("#t-swipe").addEventListener("click",()=>S.swipeLayer?stopSwipe():startSwipe());
+  $("#t-tour").addEventListener("click",()=>$("#tour").hidden?tour(0):endTour());
+}
+
+/* ---------- measure tools ---------- */
+function initTools(){
+  proj4.defs("EPSG:25832","+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+  S.toUtm=ll=>proj4("EPSG:4326","EPSG:25832",[ll.lng,ll.lat]);
+  $("#t-vol").addEventListener("click",()=>startDraw("vol"));
+  $("#t-prof").addEventListener("click",()=>startDraw("prof"));
+  $("#draw-finish").addEventListener("click",finishDraw);
+  $("#draw-cancel").addEventListener("click",cancelDraw);
+  S.map.on("click",e=>{if(!S.draw)return;S.draw.pts.push(e.latlng);redrawSketch();});
+  S.map.on("dblclick",e=>{if(S.draw){L.DomEvent.stop(e);finishDraw();}});
+}
+function startDraw(mode){
+  cancelDraw();closeCard();
+  if(!S.dsm){openCard(`<h3>Measure tools</h3><p class="sub">The elevation grid is still loading. Try again in a moment.</p>`);return;}
+  S.draw={mode,pts:[]};S.map.doubleClickZoom.disable();
+  $("#t-vol").setAttribute("aria-pressed",mode==="vol");$("#t-prof").setAttribute("aria-pressed",mode==="prof");
+  $("#drawhint").hidden=false;$("#drawmsg").textContent=mode==="vol"?"Click around the pile; double-click or Finish to close":"Click the start and end of the profile (more points bend it)";
+  S.map.getContainer().style.cursor="crosshair";
+}
+function redrawSketch(){if(S.sketch)S.map.removeLayer(S.sketch);const p=S.draw.pts;S.sketch=(S.draw.mode==="vol"&&p.length>2?L.polygon(p,{color:"#ffffff",weight:2,dashArray:"5 4",fillOpacity:.1}):L.polyline(p,{color:"#ffffff",weight:2,dashArray:"5 4"})).addTo(S.map);}
+function cancelDraw(){if(S.sketch){S.map.removeLayer(S.sketch);S.sketch=null;}S.draw=null;$("#drawhint").hidden=true;$("#t-vol").setAttribute("aria-pressed",false);$("#t-prof").setAttribute("aria-pressed",false);S.map.doubleClickZoom.enable();S.map.getContainer().style.cursor="";}
+function zAt(x,y){const g=S.sum.grid;const c=Math.floor((x-g.x0)/g.res),r=Math.floor((g.y1-y)/g.res);if(c<0||r<0||c>=g.width||r>=g.height)return null;const v=S.dsm[r*g.width+c];return v?v/100+150:null;}
+function finishDraw(){
+  const d=S.draw;if(!d)return;const pts=d.pts.map(S.toUtm);const sketch=S.sketch;S.sketch=null;cancelDraw();if(sketch)S.map.removeLayer(sketch);
+  if(d.mode==="vol"){if(pts.length<3){openCard(`<h3>Measure volume</h3><p class="sub">Draw at least three points around the pile.</p>`);return;}measureVolume(pts,d.pts);}
+  else{if(pts.length<2){openCard(`<h3>Profile</h3><p class="sub">Draw at least two points.</p>`);return;}profile(pts,d.pts);}
+}
+function measureVolume(P,ll){
+  const g=S.sum.grid;S.result=L.polygon(ll,{color:"#ffffff",weight:2,fillOpacity:.08}).addTo(S.map);
+  let area=0;for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length];area+=a[0]*b[1]-b[0]*a[1];}area=Math.abs(area)/2;
+  const edge=[];for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length],n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/g.res));for(let k=0;k<n;k++){const x=a[0]+(b[0]-a[0])*k/n,y=a[1]+(b[1]-a[1])*k/n,z=zAt(x,y);if(z!=null)edge.push([x,y,z]);}}
+  if(edge.length<3){openCard(`<h3>Measure volume</h3><p class="sub">This outline is outside the drone survey.</p>`);return;}
+  const mx=edge.reduce((a,p)=>a+p[0],0)/edge.length,my=edge.reduce((a,p)=>a+p[1],0)/edge.length;
+  let Sxx=0,Sxy=0,Syy=0,Sx=0,Sy=0,Sxz=0,Syz=0,Sz=0,n=edge.length;
+  edge.forEach(([x,y,z])=>{x-=mx;y-=my;Sxx+=x*x;Sxy+=x*y;Syy+=y*y;Sx+=x;Sy+=y;Sxz+=x*z;Syz+=y*z;Sz+=z;});
+  const A=[[Sxx,Sxy,Sx],[Sxy,Syy,Sy],[Sx,Sy,n]],B=[Sxz,Syz,Sz],sol=solve3(A,B)||[0,0,Sz/n];
+  const base=(x,y)=>sol[0]*(x-mx)+sol[1]*(y-my)+sol[2];
+  const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);const c0=Math.floor((Math.min(...xs)-g.x0)/g.res),c1=Math.ceil((Math.max(...xs)-g.x0)/g.res),r0=Math.floor((g.y1-Math.max(...ys))/g.res),r1=Math.ceil((g.y1-Math.min(...ys))/g.res);
+  let fill=0,cut=0,cells=0,miss=0,hmax=0;
+  for(let r=r0;r<=r1;r++)for(let c=c0;c<=c1;c++){const x=g.x0+(c+.5)*g.res,y=g.y1-(r+.5)*g.res;if(!inPoly(x,y,P))continue;cells++;const z=zAt(x,y);if(z==null){miss++;continue;}const h=z-base(x,y);if(h>0){fill+=h;hmax=Math.max(hmax,h);}else cut-=h;}
+  const px=g.res*g.res;
+  openCard(`<h3>Measured outline</h3>
+  <div class="kpis"><div class="kpi"><span class="k">Volume above base</span><span class="v">${F(fill*px)} <small>m³</small></span><span class="n">3 m grid</span></div><div class="kpi"><span class="k">Area</span><span class="v">${F(area)} <small>m²</small></span><span class="n">${F(area/1e4,3)} ha</span></div></div>
+  <dl class="kv"><dt>Max height above base</dt><dd>${F(hmax,1)} m</dd><dt>Below base (voids, cut)</dt><dd>${F(cut*px)} m³</dd><dt>Base slope</dt><dd>${F(Math.atan(Math.hypot(sol[0],sol[1]))*180/Math.PI,1)}°</dd><dt>Cells without drone data</dt><dd>${miss?`${miss} of ${cells}`:"none"}</dd></dl>
+  <p class="sub">Base: plane fitted through the drone surface along your outline (${edge.length} points). Draw the outline on the ground just outside the pile's toe.</p>`);
+}
+function solve3(A,b){const M=A.map((r,i)=>[...r,b[i]]);for(let i=0;i<3;i++){let p=i;for(let r=i+1;r<3;r++)if(Math.abs(M[r][i])>Math.abs(M[p][i]))p=r;[M[i],M[p]]=[M[p],M[i]];if(Math.abs(M[i][i])<1e-9)return null;for(let r=0;r<3;r++){if(r===i)continue;const f=M[r][i]/M[i][i];for(let k=i;k<4;k++)M[r][k]-=f*M[i][k];}}return M.map((r,i)=>r[3]/r[i]);}
+function inPoly(x,y,P){let ins=false;for(let i=0,j=P.length-1;i<P.length;j=i++){const [xi,yi]=P[i],[xj,yj]=P[j];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))ins=!ins;}return ins;}
+function profile(P,ll){
+  S.result=L.polyline(ll,{color:"#ffffff",weight:3}).addTo(S.map);
+  const g=S.sum.grid,step=g.res/2,out=[];let dist=0;
+  for(let i=1;i<P.length;i++){const a=P[i-1],b=P[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(len/step));for(let k=(i===1?0:1);k<=n;k++){const x=a[0]+(b[0]-a[0])*k/n,y=a[1]+(b[1]-a[1])*k/n;out.push([dist+len*k/n,zAt(x,y)]);}dist+=len;}
+  const v=out.filter(p=>p[1]!=null);if(v.length<2){openCard(`<h3>Profile</h3><p class="sub">This line is outside the drone survey.</p>`);return;}
+  const zmin=Math.min(...v.map(p=>p[1])),zmax=Math.max(...v.map(p=>p[1]));
+  const W=310,H=170,m={l:40,r:8,t:10,b:28},X=d=>m.l+d/dist*(W-m.l-m.r),Y=z=>H-m.b-(z-zmin)/((zmax-zmin)||1)*(H-m.t-m.b);
+  let path="",area="",pen=false;out.forEach(([d,z])=>{if(z==null){pen=false;return;}path+=(pen?"L":"M")+X(d).toFixed(1)+","+Y(z).toFixed(1)+" ";pen=true;});
+  let s=`<line class="grid" x1="${m.l}" x2="${W-m.r}" y1="${Y(zmin)}" y2="${Y(zmin)}"/><line class="grid" x1="${m.l}" x2="${W-m.r}" y1="${Y(zmax)}" y2="${Y(zmax)}"/><text x="${m.l-5}" y="${Y(zmax)+4}" text-anchor="end">${F(zmax,1)}</text><text x="${m.l-5}" y="${Y(zmin)+4}" text-anchor="end">${F(zmin,1)}</text>`;
+  s+=`<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;
+  [0,dist/2,dist].forEach(d=>s+=`<text x="${X(d)}" y="${H-m.b+15}" text-anchor="middle">${F(d)} m</text>`);
+  openCard(`<h3>Elevation profile</h3><svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Elevation profile">${s}</svg>
+  <dl class="kv"><dt>Length</dt><dd>${F(dist)} m</dd><dt>Highest / lowest</dt><dd>${F(zmax,1)} / ${F(zmin,1)} m</dd><dt>Relief</dt><dd>${F(zmax-zmin,1)} m</dd></dl>
+  <p class="sub">Elevation in metres, in the drone survey’s height datum, 3 m grid.</p>`);
+}
+const _close=closeCard;closeCard=function(){if(S.result){S.map.removeLayer(S.result);S.result=null;}_close();};
+})();
+</script>

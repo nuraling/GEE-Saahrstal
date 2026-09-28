@@ -1,0 +1,7 @@
+# Build from THIS directory: `gcloud builds submit . --config cloudbuild.yaml`
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west1-docker.pkg.dev/level-sol-480011-r1/cloud-run-source-deploy/stockpile-intelligence-engine:latest', '.']
+images: ['europe-west1-docker.pkg.dev/level-sol-480011-r1/cloud-run-source-deploy/stockpile-intelligence-engine:latest']
+options:
+  machineType: E2_HIGHCPU_8
