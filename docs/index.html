@@ -327,7 +327,7 @@ function selectTab(t){
 }
 
 /* ---------- sign-in + decryption (AES-GCM, key = PBKDF2(username:password)) ---------- */
-const CRYPTO={salt:"Vqb/xn/P603O1QnDCX/GWA==",iter:250000};
+const CRYPTO={salt:"Bry1l3tE7UmoUl8wAHvuTQ==",iter:250000};
 const b64=t=>{const b=atob(t),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;};
 async function deriveKey(user,pass){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(user.trim()+":"+pass),"PBKDF2",false,["deriveKey"]);

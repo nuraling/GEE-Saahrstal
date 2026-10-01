@@ -182,10 +182,18 @@ def main(run_dir, out):
     if os.path.exists(f"{run_dir}/port_spot/port_spot.json"):
         ps = {r["pile_id"]: r for r in json.load(open(f"{run_dir}/port_spot/port_spot.json"))["piles"]}
     gj = json.load(open(f"{run_dir}/piles.geojson"))
+    # material split from tools/material_zones.py (zones + colour, Rifky 2026-10-01) overrides the run's
+    # commodity outside the port; piles with no material there (EAF construction site) are left out
+    mz = {f["properties"]["name"]: f["properties"] for f in json.load(open("data/saarlouis_stockpiles_v2.geojson"))["features"]
+          if "material_basis" in f["properties"]}
     pile_feats = []
     for f in gj["features"]:
         pid = f["properties"].get("pile_id")
-        p = rows.get(pid, {})
+        p = dict(rows.get(pid, {}))
+        if pid in mz:
+            if "commodity" not in mz[pid]:
+                continue
+            p["commodity"], p["commodity_source"] = mz[pid]["commodity"], mz[pid]["material_basis"]
         com = p.get("commodity") or "unknown"
         vol = p.get("volume_toe_base_m3") if p.get("uav_measured") else None
         dens = DENSITY_DE.get(com)
